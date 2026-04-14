@@ -130,7 +130,3 @@ npm run build
 ```
 
 ---
-
-## The Challenge
-
-> ✏️ *Placeholder — the specific tasks will be pasted here.*
