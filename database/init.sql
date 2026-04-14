@@ -11,12 +11,25 @@ CREATE TABLE IF NOT EXISTS alunos (
   cpf VARCHAR(14) NOT NULL UNIQUE,
   cep VARCHAR(9) NOT NULL,
   logradouro VARCHAR(255) NOT NULL,
+  bairro VARCHAR(100) NOT NULL,
+  cidade VARCHAR(100) NOT NULL,
+  uf CHAR(2) NOT NULL,
   status_ativo TINYINT(1) NOT NULL DEFAULT 1,
   plano_id INT NOT NULL,
   CONSTRAINT fk_aluno_plano FOREIGN KEY (plano_id) REFERENCES planos(id)
 );
 
-INSERT INTO planos (nome, hora_inicio, hora_fim) VALUES
-  ('Plano Básico', '06:00:00', '10:00:00'),
-  ('Plano Intermediário', '06:00:00', '18:00:00'),
-  ('Plano Premium', '00:00:00', '23:59:59');
+-- Seed de planos
+INSERT INTO planos (id, nome, hora_inicio, hora_fim) VALUES
+  (1, 'Integral', '00:00:00', '23:59:59'),
+  (2, 'Manhã',    '06:00:00', '12:00:00'),
+  (3, 'Noite',    '18:00:00', '22:00:00');
+
+-- Seed de alunos para facilitar testes
+-- João  → plano Integral (sempre acessível)
+-- Maria → plano Manhã    (acessível 06–12h; nega fora do horário)
+-- Pedro → inativo        (sempre negado independente de horário)
+INSERT INTO alunos (nome, cpf, cep, logradouro, bairro, cidade, uf, status_ativo, plano_id) VALUES
+  ('João Silva',    '111.111.111-11', '01001-000', 'Praça da Sé',      'Sé',        'São Paulo', 'SP', 1, 1),
+  ('Maria Souza',   '222.222.222-22', '02002-000', 'Rua Voluntários',  'Santana',   'São Paulo', 'SP', 1, 2),
+  ('Pedro Inativo', '333.333.333-33', '03003-000', 'Av Paulista',      'Bela Vista','São Paulo', 'SP', 0, 3);

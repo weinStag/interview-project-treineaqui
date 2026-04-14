@@ -20,7 +20,7 @@ Welcome to the **GymGate** monorepo! This repository is structured as a full-sta
 
 ## Prerequisites
 
-- [Node.js](https://nodejs.org/) v18+
+- [Node.js](https://nodejs.org/) v20.19+ ou v22+
 - [Docker](https://www.docker.com/) & Docker Compose v2
 
 ---
@@ -69,7 +69,14 @@ npm install
 Copy the example file and fill in your values:
 
 ```bash
+# Linux / macOS / Git Bash
 cp .env.example .env
+
+# Windows (cmd)
+copy .env.example .env
+
+# Windows (PowerShell)
+Copy-Item .env.example .env
 ```
 
 Default `.env.example`:
